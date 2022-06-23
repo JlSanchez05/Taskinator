@@ -1,5 +1,7 @@
 let formEl = document.querySelector('#task-form')
-let tasksToDoEl = document.querySelector('#tasks-to-do')
+let tasksToDoEl = document.querySelector('#tasks-to-do') 
+
+let taskIdCounter = 0
 
 /*
 Adding an event lister to the button
@@ -20,7 +22,7 @@ let taskFormHandler = function(event){
     console.dir(taskNameInput)
     console.log(taskTypeInput)
 
-    // check if input values are empty strings
+    // check if input values are empty stringsd
 
     if(!taskNameInput || !taskTypeInput){
         alert("You need to fill out the task form!")
@@ -49,23 +51,21 @@ let taskFormHandler = function(event){
 
 let createTaskEl = function(taskDataObj){
   
- //create list item
-    let listItemEl = document.createElement('li')
-    listItemEl.className = 'task-item'
-    
-    //create div to hold task info and add to list item
-    let taskInfoEl = document.createElement('div')
-    // give it a class name
-    taskInfoEl.className = 'task-info'
-    // add html content to div
+    let listItemEl = document.createElement("li")
+    listItemEl.className = "task-item"
+  
+    // add task id as a custom attribute
+    listItemEl.setAttribute("data-task-id", taskIdCounter)
+  
+    let taskInfoEl = document.createElement("div")
+    taskInfoEl.className = "task-info";
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
     listItemEl.appendChild(taskInfoEl)
-    //add entire list item to list
+  
     tasksToDoEl.appendChild(listItemEl)
-
-
-
-
+  
+    // increase task counter for next unique id
+    taskIdCounter++
 }
 
 
